@@ -36,7 +36,6 @@ func ParseGoStructFields(goStruct string) ([]string, []string) {
 		fieldNames = append(fieldNames, columnName)
 		fieldTypes = append(fieldTypes, dataType)
 	}
-	fmt.Println(fieldNames, fieldTypes)
 	return fieldNames, fieldTypes
 }
 
