@@ -1,4 +1,4 @@
-package helpers
+package golang_structs_parser
 
 import (
 	"fmt"

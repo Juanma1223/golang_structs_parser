@@ -1,12 +1,8 @@
 package golang_structs_parser
 
-import (
-	"github.com/Juanma1223/golang_structs_parser/src/helpers"
-)
-
 // Parse golang struct from file string, return equivalent json object
 func ParseGoToJson(goStruct string) string {
-	fields, types := helpers.ParseGoStructFields(goStruct)
+	fields, types := ParseGoStructFields(goStruct)
 	jsonResult := "{\n"
 	for i, field := range fields {
 		jsonResult = jsonResult + "\"" + field + "\":"
