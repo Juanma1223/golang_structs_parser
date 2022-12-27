@@ -1,4 +1,4 @@
-package golang_structs_parser
+package golangstructsparser
 
 // Parse golang struct from file string, return equivalent json object
 func ParseGoToJson(goStruct string) string {
