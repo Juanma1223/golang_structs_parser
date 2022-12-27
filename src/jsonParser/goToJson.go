@@ -1,7 +1,7 @@
 package jsonParser
 
 import (
-	"github.com/Juanma1223/golang_structs_parser/src/helpers"
+	"github.com/Juanma1223/golang-structs-parser/src/helpers"
 )
 
 // Parse golang struct from file string, return equivalent json object
