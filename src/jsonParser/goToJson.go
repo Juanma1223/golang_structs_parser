@@ -1,4 +1,4 @@
-package jsonParser
+package golang_structs_parser
 
 import (
 	"github.com/Juanma1223/golang_structs_parser/src/helpers"
