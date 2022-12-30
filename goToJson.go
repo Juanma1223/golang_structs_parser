@@ -1,11 +1,13 @@
 package golangstructsparser
 
+import "github.com/iancoleman/strcase"
+
 // Parse golang struct from file string, return equivalent json object
 func ParseGoToJson(goStruct string) string {
 	fields, types := ParseGoStructFields(goStruct)
 	jsonResult := "{\n"
 	for i, field := range fields {
-		jsonResult = jsonResult + "\"" + field + "\":"
+		jsonResult = jsonResult + "\"" + strcase.ToLowerCamel(field) + "\":"
 		// Parse number or string
 		if types[i] == "int" || types[i] == "float32" || types[i] == "float64" {
 			jsonResult = jsonResult + "" + "1"
