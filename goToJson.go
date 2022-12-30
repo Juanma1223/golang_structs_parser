@@ -1,4 +1,4 @@
-package golangstructsparser
+package golang_structs_parser
 
 import "github.com/iancoleman/strcase"
 
