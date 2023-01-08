@@ -42,5 +42,9 @@ func typeAssertion(field interface{}) string {
 	if ok {
 		return "[]"
 	}
+	_, ok = field.(map[string]interface{})
+	if ok {
+		return "struct"
+	}
 	return ""
 }
