@@ -1,0 +1,1040 @@
+{
+	"steps": [
+		{
+			"name": "general",
+			"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-general-white.svg?alt=media&token=d3c1f7b0-c1a2-426e-bb04-98a7b1d2bc37",
+			"title": "General"
+		},
+		{
+			"name": "vehicle",
+			"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-car-white.svg?alt=media&token=1e04ab01-6f19-4316-9544-cc24fc7fcd13",
+			"title": "Vehicle"
+		},
+		{
+			"name": "location",
+			"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-location-white.svg?alt=media&token=30844c5e-9afb-4636-bb43-3e779ee1a398",
+			"title": "Location"
+		},
+		{
+			"name": "comments",
+			"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-comments-white.svg?alt=media&token=b3c4844d-2e24-484c-9ca2-9740590bd239",
+			"title": "Comments"
+		}
+	],
+	"colors": {
+		"--main-color": "rgba(5, 76, 158, 1);",
+		"--main-color-light": "rgba(87, 123, 165, 1);",
+		"--secondary-color": "rgba(210, 58, 153, 1);",
+		"--error-red": "rgba(221, 20, 19, 1);",
+		"--success-green": "rgba(0, 152, 52, 1);"
+	},
+	"initialForm": {
+		"general": {
+			"client": {
+				"requesterType": "",
+				"email": "",
+				"fullName": "",
+				"companyType": "",
+				"companyName": "",
+				"office": ""
+			},
+			"request": {
+				"targetDate": "",
+				"orderType": ""
+			}
+		},
+		"vehicle": {
+			"vehicleForm": {
+				"year": "",
+				"make": "",
+				"model": "",
+				"color": "",
+				"vin": "",
+				"transmission": ""
+			}
+		},
+		"location": {
+			"pickupInformation": {
+				"time": "",
+				"placeType": "",
+				"placeName": "",
+				"streetAddress": "",
+				"city": "",
+				"state": "",
+				"zip": "",
+				"link": ""
+			},
+			"pickupPointOfContact": {
+				"fullName": "",
+				"phone": "",
+				"pickupInstructions": ""
+			},
+			"deliveryInformation": {
+				"time": "",
+				"placeType": "",
+				"placeName": "",
+				"streetAddress": "",
+				"city": "",
+				"state": "",
+				"zip": "",
+				"link": ""
+			},
+			"deliveryPointOfContact": {
+				"fullName": "",
+				"phone": "",
+				"deliveryInstructions": ""
+			}
+		},
+		"comments": {
+			"commentsForm": {
+				"generalComments": ""
+			}
+		}
+	},
+	"general": {
+		"dirty": false,
+		"errorMessages": {
+			"noEmptyFields": "You have to complete all the mandatory fields",
+			"backend": "Something went wrong",
+			"validations": {
+				"notEmpty": "This field is mandatory"
+			}
+		},
+		"footerButtons": [
+			{
+				"label": "Exit",
+				"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-arrow-left.svg?alt=media&token=254fe3e1-29ec-42c8-b4bd-273be83bdd33",
+				"iconPosition": "left",
+				"action": {
+					"type": "redirect",
+					"payload": "/welcome"
+				},
+				"navigation": true,
+				"primary": false
+			},
+			{
+				"label": "Next",
+				"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-arrow-right.svg?alt=media&token=a98357a7-8aaf-437f-883b-068aab95162d",
+				"iconPosition": "right",
+				"action": {
+					"type": "nextStep"
+				},
+				"navigation": true,
+				"primary": true
+			}
+		],
+		"title": "General",
+		"name": "general",
+		"sections": [
+			{
+				"title": "Client",
+				"name": "client",
+				"fields": [
+					{
+						"placeholder": "* Requester type",
+						"label": "Requester type",
+						"name": "requesterType",
+						"inputMode": "",
+						"inputType": "dropdown",
+						"validations": [
+							{
+								"messageKey": "notEmpty"
+							}
+						],
+						"options": [
+							{
+								"value": "0",
+								"label": "Agent"
+							},
+							{
+								"value": "1",
+								"label": "Client"
+							}
+						],
+						"order": 0
+					},
+					{
+						"placeholder": "* Email",
+						"label": "Email",
+						"name": "email",
+						"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-email.svg?alt=media&token=68b5772e-fc9c-4bef-b17d-847ce3246a0a",
+						"inputMode": "email",
+						"inputType": "text",
+						"type": "email",
+						"autofill": true,
+						"validations": [
+							{
+								"messageKey": "notEmpty"
+							}
+						],
+						"order": 1
+					},
+					{
+						"placeholder": "* Fullname",
+						"label": "Fullname",
+						"name": "fullName",
+						"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-human.svg?alt=media&token=45ba480b-24d7-4a5c-826c-6e17aec475d1",
+						"inputMode": "text",
+						"inputType": "text",
+						"type": "text",
+						"validations": [
+							{
+								"messageKey": "notEmpty"
+							}
+						],
+						"order": 2
+					},
+					{
+						"placeholder": "* Company Type",
+						"label": "Company Type",
+						"name": "companyType",
+						"inputMode": "",
+						"inputType": "dropdown",
+						"validations": [
+							{
+								"messageKey": "notEmpty"
+							}
+						],
+						"options": [
+							{
+								"value": "0",
+								"label": "Company"
+							},
+							{
+								"value": "1",
+								"label": "No company"
+							}
+						],
+						"order": 3
+					},
+					{
+						"placeholder": "* Company name",
+						"label": "Company name",
+						"name": "companyName",
+						"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-company.svg?alt=media&token=1bde740f-6080-43fa-ad8f-1c69b9808b3d",
+						"inputMode": "text",
+						"inputType": "text",
+						"type": "text",
+						"validations": [
+							{
+								"messageKey": "notEmpty"
+							}
+						],
+						"order": 4,
+						"renderingDependencies": [
+							{
+								"field": "companyType",
+								"condition": {
+									"messageKey": "notEmpty",
+									"params": null
+								}
+							},
+							{
+								"field": "companyType",
+								"condition": {
+									"messageKey": "differentFrom",
+									"params": "1"
+								}
+							}
+						]
+					},
+					{
+						"placeholder": "* Office",
+						"label": "Office",
+						"name": "office",
+						"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-office.svg?alt=media&token=2e5c6b57-4bdf-497b-bea1-d84c321c1b34",
+						"inputMode": "text",
+						"inputType": "text",
+						"type": "text",
+						"validations": [
+							{
+								"messageKey": "notEmpty"
+							}
+						],
+						"order": 5,
+						"renderingDependencies": [
+							{
+								"field": "companyType",
+								"condition": {
+									"messageKey": "notEmpty",
+									"params": null
+								}
+							},
+							{
+								"field": "companyType",
+								"condition": {
+									"messageKey": "differentFrom",
+									"params": "1"
+								}
+							}
+						]
+					}
+				]
+			},
+			{
+				"title": "Request",
+				"name": "request",
+				"fields": [
+					{
+						"placeholder": "* Target date",
+						"label": "Target date",
+						"name": "targetDate",
+						"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-date.svg?alt=media&token=21d1601e-1231-45da-9f3e-8973ec7834ec",
+						"inputMode": "",
+						"inputType": "date",
+						"type": "date",
+						"validations": [
+							{
+								"messageKey": "notEmpty"
+							}
+						],
+						"order": 0
+					},
+					{
+						"placeholder": "* Order type",
+						"label": "Order type",
+						"name": "orderType",
+						"inputMode": "",
+						"inputType": "dropdown",
+						"validations": [
+							{
+								"messageKey": "notEmpty"
+							}
+						],
+						"options": [
+							{
+								"value": "normal",
+								"label": "Normal"
+							},
+							{
+								"value": "return",
+								"label": "Return"
+							},
+							{
+								"value": "trade",
+								"label": "Trade"
+							}
+						]
+					},
+					{
+						"placeholder": "* Transport type",
+						"label": "Transport type",
+						"name": "transportType",
+						"inputMode": "",
+						"inputType": "dropdown",
+						"validations": [
+							{
+								"messageKey": "notEmpty"
+							}
+						],
+						"options": [
+							{
+								"value": "0",
+								"label": "Drive away",
+								"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-driver.svg?alt=media&token=8fdb8672-56bc-4d96-90b8-6a3d46a0baab"
+							},
+							{
+								"value": "1",
+								"label": "Towe",
+								"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-towe.svg?alt=media&token=b5fb954f-2c18-4fb0-aa7d-445e903a700c"
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	"vehicle": {
+		"dirty": false,
+		"errorMessages": {
+			"noEmptyFields": "You have to complete all the mandatory fields",
+			"noInvalidFields": "You have invalid fields",
+			"backend": "Something went wrong",
+			"validations": {
+				"notEmpty": "This field is mandatory",
+				"greaterThan": "The year must be greater than 1900",
+				"lessThan": "The year must be less than 2024",
+				"checkVIN": "The VIN is not valid"
+			}
+		},
+		"title": "Vehicle",
+		"name": "vehicle",
+		"footerButtons": [
+			{
+				"label": "Back",
+				"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-arrow-left.svg?alt=media&token=254fe3e1-29ec-42c8-b4bd-273be83bdd33",
+				"iconPosition": "left",
+				"action": {
+					"type": "prevStep"
+				},
+				"navigation": true,
+				"primary": false
+			},
+			{
+				"label": "Next",
+				"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-arrow-right.svg?alt=media&token=a98357a7-8aaf-437f-883b-068aab95162d",
+				"iconPosition": "right",
+				"action": {
+					"type": "nextStep"
+				},
+				"navigation": true,
+				"primary": true
+			}
+		],
+		"sections": [
+			{
+				"title": "",
+				"name": "vehicleForm",
+				"fields": [
+					{
+						"placeholder": "* Year",
+						"label": "Year",
+						"name": "year",
+						"autocomplete": false,
+						"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-year.svg?alt=media&token=2d0337ff-8a27-4f65-b94b-e44e4cd0273b",
+						"inputMode": "numeric",
+						"inputType": "text",
+						"type": "number",
+						"validations": [
+							{
+								"messageKey": "notEmpty"
+							},
+							{
+								"messageKey": "greaterThan",
+								"params": 1900
+							},
+							{
+								"messageKey": "lessThan",
+								"params": 2024
+							}
+						],
+						"order": 0
+					},
+					{
+						"placeholder": "* Make",
+						"label": "Make",
+						"name": "make",
+						"autocomplete": false,
+						"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-carinfo.svg?alt=media&token=7dcc1200-24f0-4b93-9f0e-f91914a0cba0",
+						"inputMode": "text",
+						"inputType": "text",
+						"type": "text",
+						"validations": [
+							{
+								"messageKey": "notEmpty"
+							}
+						],
+						"order": 1
+					},
+					{
+						"placeholder": "* Model",
+						"label": "Model",
+						"name": "model",
+						"autocomplete": false,
+						"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-carinfo.svg?alt=media&token=7dcc1200-24f0-4b93-9f0e-f91914a0cba0",
+						"inputMode": "text",
+						"inputType": "text",
+						"type": "text",
+						"validations": [
+							{
+								"messageKey": "notEmpty"
+							}
+						],
+						"order": 2
+					},
+					{
+						"placeholder": "Color",
+						"label": "Color",
+						"name": "color",
+						"autocomplete": false,
+						"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-color.svg?alt=media&token=d4536358-4261-430f-b832-610f6b508467",
+						"inputMode": "text",
+						"inputType": "text",
+						"type": "text",
+						"validations": [],
+						"order": 3
+					},
+					{
+						"placeholder": "* VIN",
+						"label": "VIN",
+						"name": "vin",
+						"autocomplete": false,
+						"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-VIN.svg?alt=media&token=9569fb41-26ec-4acd-86a0-32e416dd98ad",
+						"inputMode": "text",
+						"inputType": "text",
+						"type": "number",
+						"validations": [
+							{
+								"messageKey": "checkVIN"
+							},
+							{
+								"messageKey": "notEmpty"
+							}
+						],
+						"order": 4
+					},
+					{
+						"placeholder": "* Transmission",
+						"label": "Transmission",
+						"name": "transmission",
+						"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-transmission.svg?alt=media&token=727bc378-5c85-4902-b393-581581624b0f",
+						"inputMode": "",
+						"inputType": "dropdown",
+						"type": "text",
+						"validations": [
+							{
+								"messageKey": "notEmpty"
+							}
+						],
+						"options": [
+							{
+								"value": "0",
+								"label": "Manual"
+							},
+							{
+								"value": "1",
+								"label": "Automatic"
+							}
+						],
+						"order": 5
+					}
+				]
+			}
+		]
+	},
+	"location": {
+		"dirty": false,
+		"errorMessages": {
+			"noEmptyFields": "You have to complete all the mandatory fields",
+			"backend": "Something went wrong or whatever",
+			"validations": {
+				"notEmpty": "This field is mandatory"
+			}
+		},
+		"title": "Location",
+		"name": "location",
+		"sections": [
+			{
+				"title": "Pickup information",
+				"name": "pickupInformation",
+				"fields": [
+					{
+						"placeholder": "* Time",
+						"label": "Time",
+						"name": "time",
+						"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-time.svg?alt=media&token=f8c91e4d-5b67-4ac1-8c89-171c58c307e0",
+						"inputMode": "",
+						"inputType": "dropdown",
+						"validations": [
+							{
+								"messageKey": "notEmpty"
+							}
+						],
+						"options": [
+							{
+								"value": "1",
+								"label": "Anytime"
+							},
+							{
+								"value": "2",
+								"label": "8am-12pm"
+							},
+							{
+								"value": "3",
+								"label": "12pm-4pm"
+							},
+							{
+								"value": "4",
+								"label": "4pm-8pm"
+							},
+							{
+								"value": "5",
+								"label": "Relief services"
+							}
+						],
+						"order": 0
+					},
+					{
+						"placeholder": "* Place type",
+						"label": "Place type",
+						"name": "placeType",
+						"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-location.svg?alt=media&token=c9b99706-d145-405d-b3f2-75baf5a54e39",
+						"inputMode": "",
+						"inputType": "dropdown",
+						"validations": [
+							{
+								"messageKey": "notEmpty"
+							}
+						],
+						"options": [
+							{
+								"value": "0",
+								"label": "Costumer's house"
+							},
+							{
+								"value": "1",
+								"label": "Dealer's house"
+							},
+							{
+								"value": "2",
+								"label": "Office"
+							},
+							{
+								"value": "3",
+								"label": "Dealership"
+							},
+							{
+								"value": "4",
+								"label": "Other"
+							}
+						],
+						"order": 1
+					},
+					{
+						"placeholder": "* Place name",
+						"label": "Place name",
+						"name": "placeName",
+						"autocomplete": false,
+						"inputMode": "text",
+						"inputType": "text",
+						"type": "text",
+						"validations": [
+							{
+								"messageKey": "notEmpty"
+							}
+						],
+						"order": 2
+					},
+					{
+						"placeholder": "*Street address",
+						"label": "Street address",
+						"name": "streetAddress",
+						"autocomplete": false,
+						"inputMode": "text",
+						"inputType": "text",
+						"type": "text",
+						"validations": [
+							{
+								"messageKey": "notEmpty"
+							}
+						],
+						"order": 3
+					},
+					{
+						"placeholder": "*City",
+						"label": "City",
+						"name": "city",
+						"autocomplete": false,
+						"inputMode": "text",
+						"inputType": "text",
+						"type": "text",
+						"validations": [
+							{
+								"messageKey": "notEmpty"
+							}
+						],
+						"order": 4
+					},
+					{
+						"placeholder": "*State",
+						"label": "State",
+						"name": "state",
+						"autocomplete": false,
+						"inputMode": "text",
+						"inputType": "text",
+						"type": "text",
+						"validations": [
+							{
+								"messageKey": "notEmpty"
+							}
+						],
+						"order": 5
+					},
+					{
+						"placeholder": "*ZIP",
+						"label": "ZIP",
+						"name": "zip",
+						"autocomplete": false,
+						"inputMode": "text",
+						"inputType": "text",
+						"type": "text",
+						"validations": [
+							{
+								"messageKey": "notEmpty"
+							}
+						],
+						"order": 6
+					},
+					{
+						"placeholder": "Google Maps link",
+						"label": "Google Maps link",
+						"name": "link",
+						"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-link.svg?alt=media&token=65fb171d-642c-4cbe-bd8b-cc78d4eae044",
+						"autocomplete": false,
+						"inputMode": "text",
+						"inputType": "text",
+						"type": "text",
+						"validations": [],
+						"order": 7
+					}
+				]
+			},
+			{
+				"subtitle": "Point of contact",
+				"name": "pickupPointOfContact",
+				"fields": [
+					{
+						"placeholder": "*Full name",
+						"label": "Full name",
+						"name": "fullName",
+						"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-human.svg?alt=media&token=45ba480b-24d7-4a5c-826c-6e17aec475d1",
+						"autocomplete": false,
+						"inputMode": "text",
+						"inputType": "text",
+						"type": "text",
+						"validations": [
+							{
+								"messageKey": "notEmpty"
+							}
+						],
+						"order": 0
+					},
+					{
+						"placeholder": "*Phone number",
+						"label": "Phone Number",
+						"name": "phone",
+						"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-phone.svg?alt=media&token=e1273831-4e7b-4448-9ffb-86890b05ef94",
+						"autocomplete": false,
+						"inputMode": "numeric",
+						"inputType": "text",
+						"type": "number",
+						"validations": [
+							{
+								"messageKey": "notEmpty"
+							}
+						],
+						"order": 1
+					},
+					{
+						"placeholder": "Pickup instructions",
+						"label": "Pickup instructions",
+						"name": "pickupInstructions",
+						"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-comments.svg?alt=media&token=9c7dd5ed-ff3e-4751-ba95-4ec0dfaf323c",
+						"validations": [],
+						"inputMode": "text",
+						"inputType": "textarea",
+						"type": "text",
+						"order": 4
+					}
+				]
+			},
+			{
+				"title": "Delivery information",
+				"name": "deliveryInformation",
+				"fields": [
+					{
+						"placeholder": "* Time",
+						"label": "Time",
+						"name": "time",
+						"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-time.svg?alt=media&token=f8c91e4d-5b67-4ac1-8c89-171c58c307e0",
+						"inputMode": "",
+						"inputType": "dropdown",
+						"validations": [
+							{
+								"messageKey": "notEmpty"
+							}
+						],
+						"options": [
+							{
+								"value": "1",
+								"label": "Anytime"
+							},
+							{
+								"value": "2",
+								"label": "8am-12pm"
+							},
+							{
+								"value": "3",
+								"label": "12pm-4pm"
+							},
+							{
+								"value": "4",
+								"label": "4pm-8pm"
+							},
+							{
+								"value": "5",
+								"label": "Relief services"
+							}
+						],
+						"order": 0
+					},
+					{
+						"placeholder": "* Place type",
+						"label": "Place type",
+						"name": "placeType",
+						"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-location.svg?alt=media&token=c9b99706-d145-405d-b3f2-75baf5a54e39",
+						"inputMode": "",
+						"inputType": "dropdown",
+						"validations": [
+							{
+								"messageKey": "notEmpty"
+							}
+						],
+						"options": [
+							{
+								"value": "0",
+								"label": "Costumer's house"
+							},
+							{
+								"value": "1",
+								"label": "Dealer's house"
+							},
+							{
+								"value": "2",
+								"label": "Office"
+							},
+							{
+								"value": "3",
+								"label": "Dealership"
+							},
+							{
+								"value": "4",
+								"label": "Other"
+							}
+						],
+						"order": 1
+					},
+					{
+						"placeholder": "* Place name",
+						"label": "Place name",
+						"name": "placeName",
+						"autocomplete": false,
+						"inputMode": "text",
+						"inputType": "text",
+						"type": "text",
+						"validations": [
+							{
+								"messageKey": "notEmpty"
+							}
+						],
+						"order": 2
+					},
+					{
+						"placeholder": "*Street address",
+						"label": "Street address",
+						"name": "streetAddress",
+						"autocomplete": false,
+						"inputMode": "text",
+						"inputType": "text",
+						"type": "text",
+						"validations": [
+							{
+								"messageKey": "notEmpty"
+							}
+						],
+						"order": 3
+					},
+					{
+						"placeholder": "*City",
+						"label": "City",
+						"name": "city",
+						"autocomplete": false,
+						"inputMode": "text",
+						"inputType": "text",
+						"type": "text",
+						"validations": [
+							{
+								"messageKey": "notEmpty"
+							}
+						],
+						"order": 4
+					},
+					{
+						"placeholder": "*State",
+						"label": "State",
+						"name": "state",
+						"autocomplete": false,
+						"inputMode": "text",
+						"inputType": "text",
+						"type": "text",
+						"validations": [
+							{
+								"messageKey": "notEmpty"
+							}
+						],
+						"order": 5
+					},
+					{
+						"placeholder": "*ZIP",
+						"label": "ZIP",
+						"name": "zip",
+						"autocomplete": false,
+						"inputMode": "text",
+						"inputType": "text",
+						"type": "text",
+						"validations": [
+							{
+								"messageKey": "notEmpty"
+							}
+						],
+						"order": 6
+					},
+					{
+						"placeholder": "Google Maps link",
+						"label": "Google Maps link",
+						"name": "link",
+						"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-link.svg?alt=media&token=65fb171d-642c-4cbe-bd8b-cc78d4eae044",
+						"autocomplete": false,
+						"inputMode": "text",
+						"inputType": "text",
+						"type": "text",
+						"validations": [],
+						"order": 7
+					}
+				]
+			},
+			{
+				"subtitle": "Point of contact",
+				"name": "deliveryPointOfContact",
+				"fields": [
+					{
+						"placeholder": "*Full name",
+						"label": "Full name",
+						"name": "fullName",
+						"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-human.svg?alt=media&token=45ba480b-24d7-4a5c-826c-6e17aec475d1",
+						"autocomplete": false,
+						"inputMode": "text",
+						"inputType": "text",
+						"type": "text",
+						"validations": [
+							{
+								"messageKey": "notEmpty"
+							}
+						],
+						"order": 0
+					},
+					{
+						"placeholder": "*Phone number",
+						"label": "Phone Number",
+						"name": "phone",
+						"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-phone.svg?alt=media&token=e1273831-4e7b-4448-9ffb-86890b05ef94",
+						"autocomplete": false,
+						"inputMode": "numeric",
+						"inputType": "text",
+						"type": "number",
+						"validations": [
+							{
+								"messageKey": "notEmpty"
+							}
+						],
+						"order": 1
+					},
+					{
+						"placeholder": "Pickup instructions",
+						"label": "Pickup instructions",
+						"name": "pickupInstructions",
+						"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-comments.svg?alt=media&token=9c7dd5ed-ff3e-4751-ba95-4ec0dfaf323c",
+						"inputMode": "text",
+						"validations": [],
+						"inputType": "textarea",
+						"type": "text",
+						"order": 4
+					}
+				]
+			}
+		],
+		"footerButtons": [
+			{
+				"label": "Back",
+				"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-arrow-left.svg?alt=media&token=254fe3e1-29ec-42c8-b4bd-273be83bdd33",
+				"iconPosition": "left",
+				"action": {
+					"type": "prevStep"
+				},
+				"navigation": true,
+				"primary": false
+			},
+			{
+				"label": "Next",
+				"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-arrow-right.svg?alt=media&token=a98357a7-8aaf-437f-883b-068aab95162d",
+				"iconPosition": "right",
+				"action": {
+					"type": "nextStep"
+				},
+				"navigation": true,
+				"primary": true
+			}
+		]
+	},
+	"comments": {
+		"dirty": false,
+		"errorMessages": {
+			"backend": "Something went wrong",
+			"validations": {}
+		},
+		"title": "Comments",
+		"sections": [
+			{
+				"title": "",
+				"name": "commentsForm",
+				"fields": [
+					{
+						"placeholder": "General comments",
+						"label": "General comments",
+						"name": "generalComments",
+						"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-comments.svg?alt=media&token=9c7dd5ed-ff3e-4751-ba95-4ec0dfaf323c",
+						"inputMode": "text",
+						"validations": [],
+						"inputType": "textarea",
+						"type": "text",
+						"order": 0
+					}
+				]
+			}
+		],
+		"footerButtons": [
+			{
+				"label": "Back",
+				"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-arrow-left.svg?alt=media&token=254fe3e1-29ec-42c8-b4bd-273be83bdd33",
+				"iconPosition": "left",
+				"action": {
+					"type": "prevStep"
+				},
+				"navigation": true,
+				"primary": false
+			},
+			{
+				"label": "Send",
+				"action": {
+					"type": "showModal",
+					"payload": "confirmationModal"
+				},
+				"navigation": false
+			}
+		]
+	},
+	"modals": {
+		"confirmationModal": {
+			"name": "activationCode",
+			"subtitle": "Please enter the validation code send to your email to continue.",
+			"length": 6,
+			"buttons": [
+				{
+					"label": "Send request",
+					"action": {
+						"type": "submitForm"
+					},
+					"primary": true,
+					"isText": false
+				},
+				{
+					"label": "Cancel",
+					"isText": true,
+					"action": {
+						"type": "hideModal"
+					}
+				}
+			]
+		}
+	}
+}
