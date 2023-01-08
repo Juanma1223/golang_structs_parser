@@ -78,7 +78,7 @@ func structToString(structName string, currStruct map[string]interface{}) {
 		}
 		fields = fields + `	` + strcase.ToCamel(key) + " " + dataType + " `json:\"" + strcase.ToLowerCamel(key) + "\",omitempty` \n"
 	}
-	parsedStruct := "struct { \n" + fields + `}`
+	parsedStruct := `type ` + strcase.ToCamel(structName) + " struct { \n" + fields + `}`
 	structStrings = append(structStrings, parsedStruct)
 	fmt.Println(parsedStruct)
 }
