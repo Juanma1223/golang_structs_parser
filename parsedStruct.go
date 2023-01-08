@@ -1,0 +1,1 @@
+package golang_structs_parser
