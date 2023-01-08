@@ -9,5 +9,5 @@ import (
 func main() {
 	file, _ := os.ReadFile("../test_struct.json")
 
-	golang_structs_parser.ParseJsonToGo(string(file))
+	golang_structs_parser.ParseJsonToGo("testStruct", string(file))
 }
