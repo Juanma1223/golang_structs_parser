@@ -29,18 +29,23 @@ func typeAssertion(field interface{}) string {
 			return "float64"
 		}
 	}
-
 	_, ok = field.(bool)
 	if ok {
 		return "bool"
 	}
-	_, ok = field.(string)
+	content, ok := field.(string)
 	if ok {
+		// Check if string is marked as interface{}
+		if content == "interface{}" {
+			return content
+		}
 		return "string"
 	}
-	_, ok = field.([]interface{})
+	arr, ok := field.([]interface{})
 	if ok {
-		return "[]"
+		if len(arr) > 0 {
+			return "[]" + typeAssertion(arr[0])
+		}
 	}
 	return ""
 }

@@ -3,12 +3,26 @@
 		{
 			"name": "general",
 			"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-general-white.svg?alt=media&token=d3c1f7b0-c1a2-426e-bb04-98a7b1d2bc37",
-			"title": "General"
+			"title": "General",
+			"forced": [
+				"1",
+				"2",
+				"3"
+			]
 		},
 		{
 			"name": "vehicle",
 			"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-car-white.svg?alt=media&token=1e04ab01-6f19-4316-9544-cc24fc7fcd13",
-			"title": "Vehicle"
+			"title": "Vehicle",
+			"renderingDependencies": [
+				{
+					"field": "general.request.orderType",
+					"condition": {
+						"messageKey": "differentFrom",
+						"params": "item"
+					}
+				}
+			]
 		},
 		{
 			"name": "location",
@@ -31,8 +45,8 @@
 	"initialForm": {
 		"general": {
 			"client": {
-				"requesterType": "",
 				"email": "",
+				"requesterType": "",
 				"fullName": "",
 				"companyType": "",
 				"companyName": "",
@@ -40,7 +54,9 @@
 			},
 			"request": {
 				"targetDate": "",
-				"orderType": ""
+				"dealNumber": "",
+				"orderType": "",
+				"itemDescription": ""
 			}
 		},
 		"vehicle": {
@@ -50,7 +66,8 @@
 				"model": "",
 				"color": "",
 				"vin": "",
-				"transmission": ""
+				"transmission": "",
+				"transportType": ""
 			}
 		},
 		"location": {
@@ -95,9 +112,11 @@
 		"dirty": false,
 		"errorMessages": {
 			"noEmptyFields": "You have to complete all the mandatory fields",
+			"noInvalidFields": "You have invalid fields",
 			"backend": "Something went wrong",
 			"validations": {
-				"notEmpty": "This field is mandatory"
+				"notEmpty": "This field is mandatory",
+				"checkDealNumber": "Deal number must have 6 numbers and 2 letters"
 			}
 		},
 		"footerButtons": [
@@ -105,9 +124,9 @@
 				"label": "Exit",
 				"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-arrow-left.svg?alt=media&token=254fe3e1-29ec-42c8-b4bd-273be83bdd33",
 				"iconPosition": "left",
+				"type": "back",
 				"action": {
-					"type": "redirect",
-					"payload": "/welcome"
+					"type": "exitForm"
 				},
 				"navigation": true,
 				"primary": false
@@ -127,9 +146,25 @@
 		"name": "general",
 		"sections": [
 			{
-				"title": "Client",
+				"title": "Requester",
 				"name": "client",
 				"fields": [
+					{
+						"placeholder": "* Email",
+						"label": "Email",
+						"name": "email",
+						"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-email.svg?alt=media&token=68b5772e-fc9c-4bef-b17d-847ce3246a0a",
+						"inputMode": "email",
+						"inputType": "text",
+						"type": "email",
+						"autofill": true,
+						"validations": [
+							{
+								"messageKey": "notEmpty"
+							}
+						],
+						"order": 1
+					},
 					{
 						"placeholder": "* Requester type",
 						"label": "Requester type",
@@ -152,22 +187,6 @@
 							}
 						],
 						"order": 0
-					},
-					{
-						"placeholder": "* Email",
-						"label": "Email",
-						"name": "email",
-						"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-email.svg?alt=media&token=68b5772e-fc9c-4bef-b17d-847ce3246a0a",
-						"inputMode": "email",
-						"inputType": "text",
-						"type": "email",
-						"autofill": true,
-						"validations": [
-							{
-								"messageKey": "notEmpty"
-							}
-						],
-						"order": 1
 					},
 					{
 						"placeholder": "* Fullname",
@@ -223,14 +242,14 @@
 						"order": 4,
 						"renderingDependencies": [
 							{
-								"field": "companyType",
+								"field": "general.client.companyType",
 								"condition": {
 									"messageKey": "notEmpty",
 									"params": null
 								}
 							},
 							{
-								"field": "companyType",
+								"field": "general.client.companyType",
 								"condition": {
 									"messageKey": "differentFrom",
 									"params": "1"
@@ -254,14 +273,14 @@
 						"order": 5,
 						"renderingDependencies": [
 							{
-								"field": "companyType",
+								"field": "general.client.companyType",
 								"condition": {
 									"messageKey": "notEmpty",
 									"params": null
 								}
 							},
 							{
-								"field": "companyType",
+								"field": "general.client.companyType",
 								"condition": {
 									"messageKey": "differentFrom",
 									"params": "1"
@@ -313,32 +332,68 @@
 							{
 								"value": "trade",
 								"label": "Trade"
+							},
+							{
+								"value": "item",
+								"label": "Item"
 							}
 						]
 					},
 					{
-						"placeholder": "* Transport type",
-						"label": "Transport type",
-						"name": "transportType",
-						"inputMode": "",
-						"inputType": "dropdown",
+						"placeholder": "*Item description",
+						"label": "Item description",
+						"name": "itemDescription",
+						"inputType": "textarea",
+						"inputMode": "text",
+						"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-box.svg?alt=media&token=e231cab4-e5ad-4916-bee0-da4d9b2dff50",
 						"validations": [
 							{
 								"messageKey": "notEmpty"
 							}
 						],
-						"options": [
+						"renderingDependencies": [
 							{
-								"value": "0",
-								"label": "Drive away",
-								"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-driver.svg?alt=media&token=8fdb8672-56bc-4d96-90b8-6a3d46a0baab"
+								"field": "general.request.orderType",
+								"condition": {
+									"messageKey": "notEmpty",
+									"params": null
+								}
 							},
 							{
-								"value": "1",
-								"label": "Towe",
-								"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-towe.svg?alt=media&token=b5fb954f-2c18-4fb0-aa7d-445e903a700c"
+								"field": "general.request.orderType",
+								"condition": {
+									"messageKey": "equals",
+									"params": "item"
+								}
 							}
 						]
+					},
+					{
+						"placeholder": "* Deal number",
+						"label": "Deal number",
+						"name": "dealNumber",
+						"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-VIN.svg?alt=media&token=9569fb41-26ec-4acd-86a0-32e416dd98ad",
+						"inputMode": "text",
+						"inputType": "text",
+						"type": "number",
+						"renderingDependencies": [
+							{
+								"field": "general.client.requesterType",
+								"condition": {
+									"messageKey": "equals",
+									"params": "0"
+								}
+							}
+						],
+						"validations": [
+							{
+								"messageKey": "notEmpty"
+							},
+							{
+								"messageKey": "checkDealNumber"
+							}
+						],
+						"order": 6
 					}
 				]
 			}
@@ -354,7 +409,8 @@
 				"notEmpty": "This field is mandatory",
 				"greaterThan": "The year must be greater than 1900",
 				"lessThan": "The year must be less than 2024",
-				"checkVIN": "The VIN is not valid"
+				"lengthGreaterThan": "VIN number must have at least 8 characters",
+				"onlyLetters": "Only letters are allowed in this field"
 			}
 		},
 		"title": "Vehicle",
@@ -364,6 +420,7 @@
 				"label": "Back",
 				"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-arrow-left.svg?alt=media&token=254fe3e1-29ec-42c8-b4bd-273be83bdd33",
 				"iconPosition": "left",
+				"type": "back",
 				"action": {
 					"type": "prevStep"
 				},
@@ -451,7 +508,11 @@
 						"inputMode": "text",
 						"inputType": "text",
 						"type": "text",
-						"validations": [],
+						"validations": [
+							{
+								"messageKey": "onlyLetters"
+							}
+						],
 						"order": 3
 					},
 					{
@@ -465,7 +526,8 @@
 						"type": "number",
 						"validations": [
 							{
-								"messageKey": "checkVIN"
+								"messageKey": "lengthGreaterThan",
+								"params": 8
 							},
 							{
 								"messageKey": "notEmpty"
@@ -497,6 +559,31 @@
 							}
 						],
 						"order": 5
+					},
+					{
+						"placeholder": "* Transport type",
+						"label": "Transport type",
+						"name": "transportType",
+						"inputMode": "",
+						"inputType": "dropdown",
+						"validations": [
+							{
+								"messageKey": "notEmpty"
+							}
+						],
+						"options": [
+							{
+								"value": "Drive away",
+								"label": "Drive away",
+								"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-driver.svg?alt=media&token=8fdb8672-56bc-4d96-90b8-6a3d46a0baab"
+							},
+							{
+								"value": "Towe",
+								"label": "Towe",
+								"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-towe.svg?alt=media&token=b5fb954f-2c18-4fb0-aa7d-445e903a700c"
+							}
+						],
+						"order": 6
 					}
 				]
 			}
@@ -507,8 +594,10 @@
 		"errorMessages": {
 			"noEmptyFields": "You have to complete all the mandatory fields",
 			"backend": "Something went wrong or whatever",
+			"noInvalidFields": "You have invalid fields",
 			"validations": {
-				"notEmpty": "This field is mandatory"
+				"notEmpty": "This field is mandatory",
+				"onlyNumbers": "Only numbers are allowed"
 			}
 		},
 		"title": "Location",
@@ -549,7 +638,7 @@
 							},
 							{
 								"value": "5",
-								"label": "Relief services"
+								"label": "Express Service (ASAP)"
 							}
 						],
 						"order": 0
@@ -568,23 +657,23 @@
 						],
 						"options": [
 							{
-								"value": "0",
+								"value": "Costumer's house",
 								"label": "Costumer's house"
 							},
 							{
-								"value": "1",
-								"label": "Dealer's house"
+								"value": "Agent's house",
+								"label": "Agent's house"
 							},
 							{
-								"value": "2",
+								"value": "Office",
 								"label": "Office"
 							},
 							{
-								"value": "3",
+								"value": "Dealership",
 								"label": "Dealership"
 							},
 							{
-								"value": "4",
+								"value": "Other",
 								"label": "Other"
 							}
 						],
@@ -711,6 +800,9 @@
 						"validations": [
 							{
 								"messageKey": "notEmpty"
+							},
+							{
+								"messageKey": "onlyNumbers"
 							}
 						],
 						"order": 1
@@ -747,23 +839,106 @@
 						"options": [
 							{
 								"value": "1",
-								"label": "Anytime"
+								"label": "Anytime",
+								"renderingDependencies": [
+									{
+										"field": "location.pickupInformation.time",
+										"condition": {
+											"messageKey": "differentFrom",
+											"params": "5"
+										}
+									}
+								]
 							},
 							{
 								"value": "2",
-								"label": "8am-12pm"
+								"label": "8am-12pm",
+								"renderingDependencies": [
+									{
+										"field": "location.pickupInformation.time",
+										"condition": {
+											"messageKey": "differentFromAll",
+											"params": [
+												"5",
+												"4",
+												"3"
+											]
+										}
+									},
+									{
+										"field": "general.request.orderType",
+										"condition": {
+											"messageKey": "differentFrom",
+											"params": "trade"
+										}
+									}
+								]
 							},
 							{
 								"value": "3",
-								"label": "12pm-4pm"
+								"label": "12pm-4pm",
+								"renderingDependencies": [
+									{
+										"field": "location.pickupInformation.time",
+										"condition": {
+											"messageKey": "differentFromAll",
+											"params": [
+												"5",
+												"4"
+											]
+										}
+									},
+									{
+										"field": "general.request.orderType",
+										"condition": {
+											"messageKey": "differentFrom",
+											"params": "trade"
+										}
+									}
+								]
 							},
 							{
 								"value": "4",
-								"label": "4pm-8pm"
+								"label": "4pm-8pm",
+								"renderingDependencies": [
+									{
+										"field": "location.pickupInformation.time",
+										"condition": {
+											"messageKey": "differentFromAll",
+											"params": [
+												"5",
+												"2"
+											]
+										}
+									},
+									{
+										"field": "general.request.orderType",
+										"condition": {
+											"messageKey": "differentFrom",
+											"params": "trade"
+										}
+									}
+								]
 							},
 							{
 								"value": "5",
-								"label": "Relief services"
+								"label": "Express Service (ASAP)",
+								"renderingDependencies": [
+									{
+										"field": "location.pickupInformation.time",
+										"condition": {
+											"messageKey": "equals",
+											"params": "5"
+										}
+									},
+									{
+										"field": "general.request.orderType",
+										"condition": {
+											"messageKey": "differentFrom",
+											"params": "trade"
+										}
+									}
+								]
 							}
 						],
 						"order": 0
@@ -782,23 +957,23 @@
 						],
 						"options": [
 							{
-								"value": "0",
+								"value": "Costumer's house",
 								"label": "Costumer's house"
 							},
 							{
-								"value": "1",
-								"label": "Dealer's house"
+								"value": "Agent's house",
+								"label": "Agent's house"
 							},
 							{
-								"value": "2",
+								"value": "Office",
 								"label": "Office"
 							},
 							{
-								"value": "3",
+								"value": "Dealership",
 								"label": "Dealership"
 							},
 							{
-								"value": "4",
+								"value": "Other",
 								"label": "Other"
 							}
 						],
@@ -925,14 +1100,17 @@
 						"validations": [
 							{
 								"messageKey": "notEmpty"
+							},
+							{
+								"messageKey": "onlyNumbers"
 							}
 						],
 						"order": 1
 					},
 					{
-						"placeholder": "Pickup instructions",
-						"label": "Pickup instructions",
-						"name": "pickupInstructions",
+						"placeholder": "Delivery instructions",
+						"label": "Delivery instructions",
+						"name": "deliveryInstructions",
 						"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-comments.svg?alt=media&token=9c7dd5ed-ff3e-4751-ba95-4ec0dfaf323c",
 						"inputMode": "text",
 						"validations": [],
@@ -948,6 +1126,7 @@
 				"label": "Back",
 				"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-arrow-left.svg?alt=media&token=254fe3e1-29ec-42c8-b4bd-273be83bdd33",
 				"iconPosition": "left",
+				"type": "back",
 				"action": {
 					"type": "prevStep"
 				},
@@ -997,6 +1176,7 @@
 				"label": "Back",
 				"icon": "https://firebasestorage.googleapis.com/v0/b/crv-requests.appspot.com/o/icon-arrow-left.svg?alt=media&token=254fe3e1-29ec-42c8-b4bd-273be83bdd33",
 				"iconPosition": "left",
+				"type": "back",
 				"action": {
 					"type": "prevStep"
 				},
@@ -1016,7 +1196,7 @@
 	"modals": {
 		"confirmationModal": {
 			"name": "activationCode",
-			"subtitle": "Please enter the validation code send to your email to continue.",
+			"title": "Please enter the validation code send to your email to continue.",
 			"length": 6,
 			"buttons": [
 				{
@@ -1029,6 +1209,27 @@
 				},
 				{
 					"label": "Cancel",
+					"isText": true,
+					"action": {
+						"type": "cancelRequest"
+					}
+				}
+			]
+		},
+		"exitModal": {
+			"title": "Are you sure you want to exit? Your request will not be saved.",
+			"buttons": [
+				{
+					"label": "Yes, exit",
+					"action": {
+						"type": "redirect",
+						"payload": "/welcome"
+					},
+					"primary": true,
+					"isText": false
+				},
+				{
+					"label": "No",
 					"isText": true,
 					"action": {
 						"type": "hideModal"
