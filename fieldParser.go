@@ -101,6 +101,12 @@ func parseColumn(stringLine string) (string, string) {
 	// Clean white spaces and comments
 	line = lineCleaner(line)
 
+	if len(line) == 1 {
+		if isValidStruct(line[0]) {
+			return line[0], "struct"
+		}
+	}
+
 	if len(line) < 3 {
 		log.Fatal("Error: Column", stringLine, "syntax is incorrect")
 	}
@@ -112,4 +118,8 @@ func parseColumn(stringLine string) (string, string) {
 	goDataType := line[1]
 
 	return columnName, goDataType
+}
+
+func isValidStruct(line string) bool {
+	return line == "\tgorm.Model"
 }
