@@ -19,6 +19,13 @@ func ParseGoStructFields(goStruct string) ([]string, []string) {
 	// Skip package line
 	lines = lines[1:]
 
+	// Skip imports
+	if strings.HasPrefix(lines[0], "import") {
+		for !strings.HasPrefix(lines[0], "type") {
+			lines = lines[1:]
+		}
+	}
+
 	// Check valid struct syntax
 	if !parseStructInit(lines[0]) {
 		log.Fatal("Golang struct incorrect syntax at:", lines[0])
